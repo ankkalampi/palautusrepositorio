@@ -1,5 +1,5 @@
 import unittest
-from statistics_service import StatisticsService
+from statistics_service import StatisticsService, SortBy
 from player import Player
 
 class PlayerReaderStub:
@@ -68,16 +68,83 @@ class TestStatisticsService(unittest.TestCase):
     def test_result_is_correct(self):
         tested_result = list(self.stats.top(4))
         result = []
-        result.append(Player("Semenko", "EDM", 4, 12))
-        result.append(Player("Kurri",   "EDM", 37, 53))
-        result.append(Player("Yzerman", "DET", 42, 56))
-        result.append(Player("Lemieux", "PIT", 45, 54))
         result.append(Player("Gretzky", "EDM", 35, 89))
+        result.append(Player("Lemieux", "PIT", 45, 54))
+        result.append(Player("Yzerman", "DET", 42, 56))
+        result.append(Player("Kurri",   "EDM", 37, 53))
+        result.append(Player("Semenko", "EDM", 4, 12))
 
         result2 = list(result)
 
         
 
-        self.assertEqual(result2[2].name, tested_result[2].name)
+        self.assertEqual(result2[0].name, tested_result[0].name)
+
+
+    def test_players_sorted_correctly_by_points(self):
+        tested_result = list(self.stats.top(4, SortBy.POINTS))
+        result = []
+        
+        
+        
+        
+        
+        result.append(Player("Gretzky", "EDM", 35, 89))
+        result.append(Player("Lemieux", "PIT", 45, 54))
+        result.append(Player("Yzerman", "DET", 42, 56))
+        result.append(Player("Kurri",   "EDM", 37, 53))
+        result.append(Player("Semenko", "EDM", 4, 12))
+
+        result2 = list(result)
+
+
+        self.assertEqual(result2[0].name, tested_result[0].name)
+
+    def test_players_sorted_correctly_by_goals(self):
+        tested_result = list(self.stats.top(4, SortBy.GOALS))
+        result = []
+        
+        
+        
+        
+        result.append(Player("Lemieux", "PIT", 45, 54))
+        result.append(Player("Yzerman", "DET", 42, 56))
+        result.append(Player("Kurri",   "EDM", 37, 53))
+        result.append(Player("Gretzky", "EDM", 35, 89))
+        
+        
+        
+        result.append(Player("Semenko", "EDM", 4, 12))
+
+        result2 = list(result)
+
+
+        self.assertEqual(result2[0].name, tested_result[0].name)
+
+    def test_players_sorted_correctly_by_assits(self):
+        tested_result = list(self.stats.top(4, SortBy.ASSISTS))
+        result = []
+        
+        
+        
+        result.append(Player("Gretzky", "EDM", 35, 89))
+        result.append(Player("Yzerman", "DET", 42, 56))
+        result.append(Player("Lemieux", "PIT", 45, 54))
+        
+        result.append(Player("Kurri",   "EDM", 37, 53))
+       
+        
+        
+        
+        result.append(Player("Semenko", "EDM", 4, 12))
+
+        result2 = list(result)
+
+
+        self.assertEqual(result2[0].name, tested_result[0].name)
+
+    
+
+
 
     
